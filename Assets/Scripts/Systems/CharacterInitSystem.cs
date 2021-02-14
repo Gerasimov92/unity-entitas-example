@@ -19,7 +19,7 @@ public class CharacterInitSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasView;
+        return entity.hasView && !entity.hasHealthBar && !entity.hasTargetIndicator;
     }
 
     protected override void Execute(List<GameEntity> entities)

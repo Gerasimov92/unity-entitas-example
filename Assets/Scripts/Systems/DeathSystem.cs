@@ -15,9 +15,9 @@ public class DeathSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            if (e.character.isAlive && e.health.value <= 0)
+            if (e.character.state != CharacterState.Dead && e.health.value <= 0)
             {
-                e.character.isAlive = false;
+                e.character.state = CharacterState.Dead;
                 var animator = e.view.gameObject.GetComponentInChildren<Animator>();
                 animator.SetTrigger(Death);
             }

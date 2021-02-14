@@ -2,5 +2,4 @@
 
 public class EnemyComponent : IComponent
 {
-
 }

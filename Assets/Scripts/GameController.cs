@@ -17,7 +17,10 @@ public class GameController : MonoBehaviour
         systems.Add(new CharacterInitSystem(contexts));
         systems.Add(new LookAtSystem(contexts));
         systems.Add(new HealthBarSystem(contexts));
+        systems.Add(new CharacterSelectSystem(contexts));
+        systems.Add(new PlayerInputSystem(contexts));
         systems.Add(new DeathSystem(contexts));
+        systems.Add(new EndGameCheckSystem(contexts));
         systems.Initialize();
     }
 

@@ -9,7 +9,7 @@ public class CharacterEntity : AbstractEntity
     protected override void Start()
     {
         base.Start();
-        entity.AddCharacter(health > 0, weapon);
+        entity.AddCharacter(CharacterState.Idle, weapon, false);
         entity.AddPrefab(prefab);
         entity.AddHealth(health);
     }

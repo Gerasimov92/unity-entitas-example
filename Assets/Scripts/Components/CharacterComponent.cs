@@ -2,6 +2,7 @@ using Entitas;
 
 public class CharacterComponent : IComponent
 {
-    public bool isAlive;
+    public CharacterState state;
     public Weapon weapon;
+    public bool selected;
 }
