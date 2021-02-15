@@ -13,14 +13,16 @@ public static class GameComponentsLookup {
     public const int Globals = 2;
     public const int HealthBar = 3;
     public const int Health = 4;
-    public const int Player = 5;
-    public const int Position = 6;
-    public const int Prefab = 7;
-    public const int Rotation = 8;
-    public const int TargetIndicator = 9;
-    public const int View = 10;
+    public const int OriginTransform = 5;
+    public const int Player = 6;
+    public const int Position = 7;
+    public const int Prefab = 8;
+    public const int Rotation = 9;
+    public const int TargetIndicator = 10;
+    public const int TargetPosition = 11;
+    public const int View = 12;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 13;
 
     public static readonly string[] componentNames = {
         "Character",
@@ -28,11 +30,13 @@ public static class GameComponentsLookup {
         "Globals",
         "HealthBar",
         "Health",
+        "OriginTransform",
         "Player",
         "Position",
         "Prefab",
         "Rotation",
         "TargetIndicator",
+        "TargetPosition",
         "View"
     };
 
@@ -42,11 +46,13 @@ public static class GameComponentsLookup {
         typeof(GlobalsComponent),
         typeof(HealthBarComponent),
         typeof(HealthComponent),
+        typeof(OriginTransformComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(PrefabComponent),
         typeof(RotationComponent),
         typeof(TargetIndicatorComponent),
+        typeof(TargetPositionComponent),
         typeof(ViewComponent)
     };
 }

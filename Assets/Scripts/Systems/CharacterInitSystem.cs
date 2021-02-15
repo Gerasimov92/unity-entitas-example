@@ -26,6 +26,7 @@ public class CharacterInitSystem : ReactiveSystem<GameEntity>
     {
         foreach (var e in entities)
         {
+            e.character.animator = e.view.gameObject.GetComponentInChildren<Animator>();
             e.AddHealthBar(e.view.gameObject.GetComponent<HealthBar>(), -1);
             e.AddTargetIndicator(e.view.gameObject.GetComponent<TargetIndicator>());
         }
