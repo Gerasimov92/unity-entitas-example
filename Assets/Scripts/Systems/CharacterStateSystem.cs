@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class CharacterStateSystem : IExecuteSystem
 {
+    Contexts contexts;
     IGroup<GameEntity> entities;
     float runSpeed = 5.0f;
     float distanceFromEnemy = 0.5f;
 
     public CharacterStateSystem(Contexts contexts)
     {
+        this.contexts = contexts;
         entities = contexts.game.GetGroup(GameMatcher.Character);
     }
 
@@ -27,8 +29,7 @@ public class CharacterStateSystem : IExecuteSystem
                 if (!e.hasTargetPosition)
                 {
                     e.character.animator.SetFloat(CharacterAnimator.Speed, runSpeed);
-                    // TODO: Enemy target position
-                    e.AddTargetPosition(new Vector3(2.27f, 0.0f, 0.35f), runSpeed, distanceFromEnemy, false);
+                    e.AddTargetPosition(e.character.target.position.value, runSpeed, distanceFromEnemy, false);
                 }
                 else if (e.targetPosition.reached)
                 {
@@ -55,6 +56,7 @@ public class CharacterStateSystem : IExecuteSystem
                 break;
 
             case CharacterState.BeginShoot:
+                LookAtTarget(e);
                 e.character.animator.SetTrigger(CharacterAnimator.Shoot);
                 e.character.state = CharacterState.Shoot;
                 break;
@@ -89,11 +91,19 @@ public class CharacterStateSystem : IExecuteSystem
                 break;
 
             case CharacterState.Dead:
+                e.character.selected = false;
                 break;
 
             default:
                 break;
             }
         }
+    }
+
+    private void LookAtTarget(GameEntity e)
+    {
+        Vector3 distance = e.character.target.position.value - e.position.value;
+        Vector3 direction = distance.normalized;
+        e.ReplaceRotation(Quaternion.LookRotation(direction).eulerAngles.y);
     }
 }

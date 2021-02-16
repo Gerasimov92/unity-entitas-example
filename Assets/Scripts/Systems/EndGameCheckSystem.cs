@@ -16,10 +16,11 @@ public class EndGameCheckSystem : IExecuteSystem
 
     public void Execute()
     {
-        if (CheckEndGame())
-        {
+        if (contexts.game.gameLoop.state == GameState.EndGame)
+            return;
 
-        }
+        if (CheckEndGame())
+            contexts.game.gameLoop.state = GameState.EndGame;
     }
 
     private bool HasAliveCharacter(IGroup<GameEntity> characters)

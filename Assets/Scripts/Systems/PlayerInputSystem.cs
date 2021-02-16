@@ -1,53 +1,30 @@
-using System;
 using Entitas;
 using UnityEngine;
 
 public class PlayerInputSystem : IExecuteSystem
 {
     Contexts contexts;
-    IGroup<GameEntity> enemies;
-    bool selectFirstEnemy = true;
 
     public PlayerInputSystem(Contexts contexts)
     {
         this.contexts = contexts;
-        enemies = contexts.game.GetGroup(GameMatcher.Enemy);
     }
 
     public void Execute()
     {
-        if (selectFirstEnemy)
+        if (contexts.game.gameLoop.state != GameState.Idle)
+            return;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            NextTarget();
-            selectFirstEnemy = false;
+            contexts.game.gameLoop.state = GameState.Attack;
+            return;
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            NextTarget();
-        }
-    }
-
-    private void NextTarget()
-    {
-        var enemiesArray = enemies.GetEntities();
-
-        int currentTarget = Array.FindIndex(enemiesArray, (e) => e.character.selected);
-        if (currentTarget == -1 && enemiesArray.Length != 0)
-        {
-            enemiesArray[0].character.selected = true;
+            contexts.game.gameLoop.state = GameState.SwitchTarget;
             return;
-        }
-
-        for (int i = 1; i < enemiesArray.Length; i++)
-        {
-            int next = (currentTarget + i) % enemiesArray.Length;
-            if (enemiesArray[next].character.state != CharacterState.Dead)
-            {
-                enemiesArray[currentTarget].character.selected = false;
-                enemiesArray[next].character.selected = true;
-                return;
-            }
         }
     }
 }

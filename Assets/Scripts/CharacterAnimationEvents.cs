@@ -2,35 +2,36 @@
 
 public class CharacterAnimationEvents : MonoBehaviour
 {
-    //Character character;
+    private Contexts contexts;
 
     void Start()
     {
-        //character = GetComponentInParent<Character>();
+        contexts = Contexts.sharedInstance;
     }
 
     void ShootEnd()
     {
-        Debug.Log("ShootEnd");
-        //character.SetState(Character.State.Idle);
+        CreateEvent(AnimationEvent.ShootEnd);
     }
 
     void AttackEnd()
     {
-        Debug.Log("AttackEnd");
-        //character.SetState(Character.State.RunningFromEnemy);
+        CreateEvent(AnimationEvent.AttackEnd);
     }
 
     void PunchEnd()
     {
-        Debug.Log("PunchEnd");
-        //character.SetState(Character.State.RunningFromEnemy);
+        CreateEvent(AnimationEvent.PunchEnd);
     }
 
     void DoDamage()
     {
-        Debug.Log("DoDamage");
-        /*Character targetCharacter = character.target.GetComponent<Character>();
-        targetCharacter.DoDamage();*/
+        CreateEvent(AnimationEvent.DoDamage);
+    }
+
+    void CreateEvent(AnimationEvent e)
+    {
+        var entity = contexts.game.CreateEntity();
+        entity.AddAnimationEvent(e, transform.parent.gameObject);
     }
 }

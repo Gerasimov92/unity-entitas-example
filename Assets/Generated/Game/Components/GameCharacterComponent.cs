@@ -11,23 +11,25 @@ public partial class GameEntity {
     public CharacterComponent character { get { return (CharacterComponent)GetComponent(GameComponentsLookup.Character); } }
     public bool hasCharacter { get { return HasComponent(GameComponentsLookup.Character); } }
 
-    public void AddCharacter(CharacterState newState, Weapon newWeapon, bool newSelected, UnityEngine.Animator newAnimator) {
+    public void AddCharacter(CharacterState newState, Weapon newWeapon, bool newSelected, UnityEngine.Animator newAnimator, GameEntity newTarget) {
         var index = GameComponentsLookup.Character;
         var component = (CharacterComponent)CreateComponent(index, typeof(CharacterComponent));
         component.state = newState;
         component.weapon = newWeapon;
         component.selected = newSelected;
         component.animator = newAnimator;
+        component.target = newTarget;
         AddComponent(index, component);
     }
 
-    public void ReplaceCharacter(CharacterState newState, Weapon newWeapon, bool newSelected, UnityEngine.Animator newAnimator) {
+    public void ReplaceCharacter(CharacterState newState, Weapon newWeapon, bool newSelected, UnityEngine.Animator newAnimator, GameEntity newTarget) {
         var index = GameComponentsLookup.Character;
         var component = (CharacterComponent)CreateComponent(index, typeof(CharacterComponent));
         component.state = newState;
         component.weapon = newWeapon;
         component.selected = newSelected;
         component.animator = newAnimator;
+        component.target = newTarget;
         ReplaceComponent(index, component);
     }
 

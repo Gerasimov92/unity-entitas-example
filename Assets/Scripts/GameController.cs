@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
         var contexts = Contexts.sharedInstance;
 
         contexts.game.SetGlobals(Camera.main.transform);
+        contexts.game.SetGameLoop(GameState.Idle, null, null);
 
         systems = new Systems();
         systems.Add(new PrefabInstantiateSystem(contexts));
@@ -21,8 +22,10 @@ public class GameController : MonoBehaviour
         systems.Add(new CharacterSelectSystem(contexts));
         systems.Add(new PlayerInputSystem(contexts));
         systems.Add(new MoveToSystem(contexts));
+        systems.Add(new AnimationEventSystem(contexts));
         systems.Add(new DeathSystem(contexts));
         systems.Add(new CharacterStateSystem(contexts));
+        systems.Add(new GameLoopSystem(contexts));
         systems.Add(new EndGameCheckSystem(contexts));
         systems.Initialize();
     }

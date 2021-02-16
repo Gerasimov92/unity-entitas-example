@@ -7,4 +7,5 @@ public class CharacterComponent : IComponent
     public Weapon weapon;
     public bool selected;
     public Animator animator;
+    public GameEntity target;
 }

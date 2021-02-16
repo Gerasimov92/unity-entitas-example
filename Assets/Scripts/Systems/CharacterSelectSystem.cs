@@ -6,7 +6,7 @@ public class CharacterSelectSystem : IExecuteSystem
 
     public CharacterSelectSystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Character, GameMatcher.TargetIndicator));
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Character, GameMatcher.Enemy, GameMatcher.TargetIndicator));
     }
 
     public void Execute()
